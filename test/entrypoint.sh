@@ -1,24 +1,24 @@
 #!/bin/sh
 set -e
-cd "${TF_ACTION_WORKING_DIR:-.}"
+cd "${STL_ACTION_WORKING_DIR:-.}"
 
 set +e
-UNFMT_FILES=$(sh -c "sentinel test $*" 2>&1)
+TEST_FILES=$(sh -c "sentinel test $*" 2>&1)
 SUCCESS=$?
-echo "$UNFMT_FILES"
+echo "$TEST_FILES"
 set -e
 
 if [ $SUCCESS -eq 0 ]; then
     exit 0
 fi
 
-if [ "$TF_ACTION_COMMENT" = "1" ] || [ "$TF_ACTION_COMMENT" = "false" ]; then
+if [ "$STL_ACTION_COMMENT" = "1" ] || [ "$STL_ACTION_COMMENT" = "false" ]; then
     exit $SUCCESS
 fi
 
 # Iterate through each unformatted file and build up a comment.
 FMT_OUTPUT=""
-for file in $UNFMT_FILES; do
+for file in $TEST_FILES; do
 FILE_DIFF=$(sentinel test "$file" | sed -n '/@@.*/,//{/@@.*/d;p}')
 FMT_OUTPUT="$FMT_OUTPUT
 <details><summary><code>$file</code></summary>
