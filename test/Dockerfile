@@ -9,7 +9,7 @@ LABEL "repository"="https://github.com/thrashr888/sentinel-github-actions"
 LABEL "homepage"="http://github.com/thrashr888/sentinel-github-actions"
 LABEL "maintainer"="Paul Thrasher"
 
-RUN apk --no-cache add jq
+RUN apk --no-cache add jq curl
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
