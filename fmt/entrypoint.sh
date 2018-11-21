@@ -3,9 +3,9 @@ set -e
 cd "${STL_ACTION_WORKING_DIR:-.}"
 
 set +e
-TEST_FILES=$(sh -c "sentinel fmt $*" 2>&1)
+UNFMT_FILES=$(sh -c "sentinel fmt -check -write=false $*" 2>&1)
 SUCCESS=$?
-echo "$TEST_FILES"
+echo "$UNFMT_FILES"
 set -e
 
 if [ $SUCCESS -eq 0 ]; then
@@ -18,8 +18,8 @@ fi
 
 # Iterate through each unformatted file and build up a comment.
 FMT_OUTPUT=""
-for file in $TEST_FILES; do
-FILE_DIFF=$(sentinel fmt "$file" | sed -n '/@@.*/,//{/@@.*/d;p}')
+for file in $UNFMT_FILES; do
+FILE_DIFF=$(sentinel fmt -write=false "$file" | sed -n '/@@.*/,//{/@@.*/d;p}')
 FMT_OUTPUT="$FMT_OUTPUT
 <details><summary><code>$file</code></summary>
 
