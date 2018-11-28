@@ -16,9 +16,10 @@ if [ "$STL_ACTION_COMMENT" = "1" ] || [ "$STL_ACTION_COMMENT" = "false" ]; then
     exit $SUCCESS
 fi
 
+FMT_TEST=$(echo "$OUTPUT" | sed -e "s,$(printf '\033')\\[[0-9;]*[a-zA-Z],,g")
 COMMENT="#### \`sentinel test\` Failed
 \`\`\`
-$OUTPUT
+$FMT_TEST
 \`\`\`"
 PAYLOAD=$(echo '{}' | jq --arg body "$COMMENT" '.body = $body')
 COMMENTS_URL=$(cat /github/workflow/event.json | jq -r .pull_request.comments_url)
