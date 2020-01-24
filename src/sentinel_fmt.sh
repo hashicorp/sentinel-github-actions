@@ -1,9 +1,11 @@
 #!/bin/bash
 
+set -e
+
 function sentinelFmt {
   # Gather the output of `sentinel fmt`.
   echo "fmt: info: checking if Sentinel files in ${stlWorkingDir} are correctly formatted"
-  fmtOutput=$(sentinel fmt -check=true -write=false ${*} 2>&1)
+  fmtOutput=$(sentinel fmt -check=true -write=false ${*}/*.sentinel 2>&1)
   fmtExitCode=${?}
 
   # Exit code of 0 indicates success. Print the output and exit.
