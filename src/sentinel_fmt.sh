@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 function sentinelFmt {
   # Gather the output of `sentinel fmt`.
   echo "fmt: info: checking if Sentinel files in ${stlWorkingDir} are correctly formatted"
