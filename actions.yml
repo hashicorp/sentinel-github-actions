@@ -1,0 +1,25 @@
+name: "Sentinel GitHub Actions"
+description: "Runs Sentinel commands via GitHub Actions."
+author: "HashiCorp, Inc. Sentinel Team <Sentinel@hashicorp.com>"
+branding:
+  icon: "terminal"
+  color: "blue"
+inputs:
+  stl_actions_subcommand:
+    description: "Sentinel subcommand to execute."
+    required: true
+  stl_actions_version:
+    description: "Sentinel version to install."
+    required: true
+  stl_actions_comment:
+    description: "Whether or not to comment on pull requests."
+    default: true
+  stl_actions_working_dir:
+    description: "Sentinel working directory."
+    default: "."
+outputs:
+  stl_actions_output:
+    description: "The Sentinel outputs."
+runs:
+  using: "docker"
+  image: "./Dockerfile"
