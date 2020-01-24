@@ -20,7 +20,6 @@ action "sentinel-test" {
   }
 }
 
-
 action "sentinel-fmt" {
   uses = "hashicorp/sentinel-github-actions/fmt@v0.1"
   secrets = ["GITHUB_TOKEN"]
