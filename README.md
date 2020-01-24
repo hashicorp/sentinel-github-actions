@@ -28,7 +28,7 @@ jobs:
       - name: 'Sentinel Format'
         uses: hashicorp/sentinel-github-actions@master
         with:
-          stl_actions_version: 0.14.1
+          stl_actions_version: 0.14.2
           stl_actions_subcommand: 'fmt'
           stl_actions_working_dir: '.'
           stl_actions_comment: true
@@ -37,7 +37,7 @@ jobs:
       - name: 'Sentinel Test'
         uses: hashicorp/sentinel-github-actions@master
         with:
-          stl_actions_version: 0.12.13
+          stl_actions_version: 0.14.2
           stl_actions_subcommand: 'test'
           stl_actions_working_dir: '.'
           stl_actions_comment: true
