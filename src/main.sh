@@ -1,4 +1,7 @@
 #!/bin/bash
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 
 function stripColors {
   echo "${1}" | sed 's/\x1b\[[0-9;]*m//g'
