@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 name: "Sentinel GitHub Actions"
 description: "Runs Sentinel commands via GitHub Actions."
 author: "HashiCorp, Inc. Sentinel Team <Sentinel@hashicorp.com>"
