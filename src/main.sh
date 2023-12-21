@@ -2,19 +2,18 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-
 function stripColors {
   echo "${1}" | sed 's/\x1b\[[0-9;]*m//g'
 }
 
 function hasPrefix {
   case ${2} in
-    "${1}"*)
-      true
-      ;;
-    *)
-      false
-      ;;
+  "${1}"*)
+    true
+    ;;
+  *)
+    false
+    ;;
   esac
 }
 
@@ -68,7 +67,7 @@ function installSentinel {
   echo "Successfully downloaded Sentinel v${stlVersion}"
 
   echo "Unzipping Sentinel v${stlVersion}"
-  unzip -d /usr/local/bin /tmp/sentinel_${stlVersion} &> /dev/null
+  unzip -d /usr/local/bin /tmp/sentinel_${stlVersion} &>/dev/null
   if [ "${?}" -ne 0 ]; then
     echo "Failed to unzip Sentinel v${stlVersion}"
     exit 1
@@ -77,6 +76,7 @@ function installSentinel {
 }
 
 function main {
+  echo "ARGUMENTS: ${*}"
   # Source the other files to gain access to their functions
   scriptDir=$(dirname ${0})
   source ${scriptDir}/sentinel_fmt.sh
@@ -86,18 +86,18 @@ function main {
   cd ${GITHUB_WORKSPACE}/${stlWorkingDir}
 
   case "${stlSubcommand}" in
-    fmt)
-      installSentinel
-      sentinelFmt ${*}
-      ;;
-    test)
-      installSentinel
-      sentinelTest ${*}
-      ;;
-    *)
-      echo "Error: Must provide a valid value for sentinel_subcommand"
-      exit 1
-      ;;
+  fmt)
+    installSentinel
+    sentinelFmt ${*}
+    ;;
+  test)
+    installSentinel
+    sentinelTest ${*}
+    ;;
+  *)
+    echo "Error: Must provide a valid value for sentinel_subcommand"
+    exit 1
+    ;;
   esac
 }
 
