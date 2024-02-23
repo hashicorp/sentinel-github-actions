@@ -1,12 +1,11 @@
-#!/bin/bash
+#!/bin/bash -x
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
-
 
 function sentinelFmt {
   # Gather the output of `sentinel fmt`.
   echo "fmt: info: checking if Sentinel files in ${stlWorkingDir} are correctly formatted"
-  fmtOutput=$(sentinel fmt -check=true -write=false ${*} 2>&1)
+  fmtOutput=$(sentinel fmt -check=true $(find ${stlWorkingDir} -name "*.sentinel" -type f) 2>&1)
   fmtExitCode=${?}
 
   # Exit code of 0 indicates success. Print the output and exit.
@@ -30,7 +29,7 @@ function sentinelFmt {
   echo "${fmtOutput}"
   echo
   echo "fmt: error: the following files in ${stlWorkingDir} are incorrectly formatted"
-  fmtFileList=$(sentinel fmt -check=true -write=false ${stlWorkingDir})
+  fmtFileList=$(sentinel fmt -check=true -write=false $(find ${stlWorkingDir} -name "*.sentinel" -type f))
   echo "${fmtFileList}"
   echo
 
@@ -57,7 +56,7 @@ ${fmtComment}
     fmtPayload=$(echo "${fmtCommentWrapper}" | jq -R --slurp '{body: .}')
     fmtCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
     echo "fmt: info: commenting on the pull request"
-    echo "${fmtPayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${fmtCommentsURL}" > /dev/null
+    echo "${fmtPayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${fmtCommentsURL}" >/dev/null
   fi
 
   exit ${fmtExitCode}
