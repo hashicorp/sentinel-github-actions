@@ -5,7 +5,7 @@
 function sentinelFmt {
   # Gather the output of `sentinel fmt`.
   echo "fmt: info: checking if Sentinel files in ${stlWorkingDir} are correctly formatted"
-  fileList=$(find ${stlWorkingDir} -name "*.sentinel" -type f)
+  fileList=$(find . -name "*.sentinel" -type f)
   fmtOutput=$(sentinel fmt -check=true ${fileList} 2>&1)
   fmtExitCode=${?}
 
@@ -30,7 +30,7 @@ function sentinelFmt {
   echo "${fmtOutput}"
   echo
   echo "fmt: error: the following files in ${stlWorkingDir} are incorrectly formatted"
-  fileList=$(find ${stlWorkingDir} -name "*.sentinel" -type f)
+  fileList=$(find . -name "*.sentinel" -type f)
   fmtFileList=$(sentinel fmt -check=true -write=false ${fileList})
   echo "${fmtFileList}"
   echo
