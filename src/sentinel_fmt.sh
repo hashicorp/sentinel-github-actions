@@ -5,7 +5,7 @@
 function sentinelFmt {
   # Gather the output of `sentinel fmt`.
   echo "fmt: info: checking if Sentinel files in ${stlWorkingDir} are correctly formatted"
-  fileList=$(find . -name "*.sentinel" -type f)
+  fileList=$(find . -name "*.sentinel" -type f -not -path "./test/*")
   fmtOutput=$(sentinel fmt -check=true ${fileList} 2>&1)
   fmtExitCode=${?}
 
