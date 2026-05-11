@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright IBM Corp. 2018, 2024
+# Copyright IBM Corp. 2018, 2026
 # SPDX-License-Identifier: MPL-2.0
 
 function stripColors {
